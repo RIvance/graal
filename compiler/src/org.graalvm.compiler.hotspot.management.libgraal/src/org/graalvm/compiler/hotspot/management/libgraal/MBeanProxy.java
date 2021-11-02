@@ -24,12 +24,12 @@
  */
 package org.graalvm.compiler.hotspot.management.libgraal;
 
-import static org.graalvm.compiler.hotspot.management.libgraal.annotation.JMXFromLibGraal.Id.GetFactory;
-import static org.graalvm.compiler.hotspot.management.libgraal.annotation.JMXFromLibGraal.Id.SignalRegistrationRequest;
-import static org.graalvm.compiler.hotspot.management.libgraal.annotation.JMXFromLibGraal.Id.Unregister;
 import static org.graalvm.compiler.hotspot.management.libgraal.MBeanProxyGen.callGetFactory;
 import static org.graalvm.compiler.hotspot.management.libgraal.MBeanProxyGen.callSignalRegistrationRequest;
 import static org.graalvm.compiler.hotspot.management.libgraal.MBeanProxyGen.callUnregister;
+import static org.graalvm.compiler.hotspot.management.libgraal.annotation.JMXFromLibGraal.Id.GetFactory;
+import static org.graalvm.compiler.hotspot.management.libgraal.annotation.JMXFromLibGraal.Id.SignalRegistrationRequest;
+import static org.graalvm.compiler.hotspot.management.libgraal.annotation.JMXFromLibGraal.Id.Unregister;
 import static org.graalvm.nativebridge.jni.JNIUtil.getBinaryName;
 import static org.graalvm.word.LocationIdentity.ANY_LOCATION;
 
@@ -50,12 +50,14 @@ import javax.management.ObjectName;
 
 import org.graalvm.compiler.hotspot.GraalHotSpotVMConfig;
 import org.graalvm.compiler.hotspot.HotSpotGraalRuntime;
+import org.graalvm.compiler.hotspot.management.AggregatedMemoryPoolBean;
 import org.graalvm.compiler.hotspot.management.Factory;
+import org.graalvm.compiler.hotspot.management.JMXFromLibGraalEntryPoints;
 import org.graalvm.compiler.hotspot.management.JMXToLibGraalCalls;
 import org.graalvm.compiler.hotspot.management.LibGraalMBean;
-import org.graalvm.compiler.hotspot.management.JMXFromLibGraalEntryPoints;
 import org.graalvm.compiler.hotspot.management.libgraal.annotation.JMXFromLibGraal;
 import org.graalvm.compiler.serviceprovider.IsolateUtil;
+import org.graalvm.libgraal.jni.annotation.FromLibGraalEntryPointsResolver;
 import org.graalvm.nativebridge.jni.JNI;
 import org.graalvm.nativebridge.jni.JNIExceptionWrapper;
 import org.graalvm.nativebridge.jni.JNIExceptionWrapper.ExceptionHandler;
@@ -64,12 +66,10 @@ import org.graalvm.nativeimage.CurrentIsolate;
 import org.graalvm.nativeimage.UnmanagedMemory;
 import org.graalvm.nativeimage.c.type.CCharPointer;
 import org.graalvm.nativeimage.c.type.CTypeConversion;
+import org.graalvm.word.Pointer;
 import org.graalvm.word.WordFactory;
 
 import jdk.vm.ci.hotspot.HotSpotJVMCIRuntime;
-import org.graalvm.compiler.hotspot.management.AggregatedMemoryPoolBean;
-import org.graalvm.libgraal.jni.annotation.FromLibGraalEntryPointsResolver;
-import org.graalvm.word.Pointer;
 
 class MBeanProxy<T extends DynamicMBean> {
 
@@ -381,6 +381,7 @@ class MBeanProxy<T extends DynamicMBean> {
      * @param classData the class to define in HotSpot
      * @return the defined class
      */
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", justification = "#1791")
     private static JNI.JClass defineClassInHotSpot(JNI.JNIEnv env, JNI.JObject classLoader, ClassData classData) {
         CCharPointer classDataPointer = UnmanagedMemory.malloc(classData.byteCode.length);
         ByteBuffer buffer = CTypeConversion.asByteBuffer(classDataPointer, classData.byteCode.length);

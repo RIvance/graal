@@ -68,6 +68,7 @@ import java.nio.file.FileVisitor;
 import java.nio.file.InvalidPathException;
 import java.nio.file.LinkOption;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.NotLinkException;
 import java.nio.file.OpenOption;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
@@ -753,6 +754,7 @@ public final class TruffleFile {
      * @throws SecurityException if the {@link FileSystem} denied the operation
      * @since 19.0
      */
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", justification = "#1791")
     @TruffleBoundary
     public Collection<TruffleFile> list() throws IOException {
         try {
@@ -1390,7 +1392,7 @@ public final class TruffleFile {
 
     /**
      * Reads the target of a symbolic link.
-     * 
+     *
      * @return the {@link TruffleFile} representing the target of the symbolic link
      * @throws NotLinkException if the {@link TruffleFile} is not a symbolic link
      * @throws IOException in case of IO error

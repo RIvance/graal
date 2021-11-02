@@ -34,7 +34,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.oracle.svm.core.log.Log;
 import org.graalvm.compiler.word.Word;
 import org.graalvm.nativeimage.ImageSingletons;
 import org.graalvm.nativeimage.Platform;
@@ -57,6 +56,7 @@ import com.oracle.svm.core.c.function.CEntryPointCreateIsolateParameters;
 import com.oracle.svm.core.c.function.CEntryPointOptions;
 import com.oracle.svm.core.jdk.InternalVMMethod;
 import com.oracle.svm.core.jdk.RuntimeSupport;
+import com.oracle.svm.core.log.Log;
 import com.oracle.svm.core.thread.JavaThreads;
 import com.oracle.svm.core.util.Counter;
 
@@ -226,6 +226,7 @@ public class JavaMainWrapper {
         return Math.toIntExact(argvLength.rawValue());
     }
 
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", justification = "#1791")
     public static boolean setCRuntimeArgument0(String arg0) {
         if (!isArgumentBlockSupported()) {
             throw new UnsupportedOperationException("Argument vector support not available");

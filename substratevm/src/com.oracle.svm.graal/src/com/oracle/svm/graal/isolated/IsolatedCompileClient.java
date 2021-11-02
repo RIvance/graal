@@ -81,6 +81,7 @@ public final class IsolatedCompileClient {
         return handles.getObject(handle);
     }
 
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", justification = "#1791")
     public CompilerHandle<String> createStringInCompiler(String s) {
         try (CTypeConversion.CCharPointerHolder cstr = CTypeConversion.toCString(s)) {
             return createStringInCompiler0(compiler, cstr.get());

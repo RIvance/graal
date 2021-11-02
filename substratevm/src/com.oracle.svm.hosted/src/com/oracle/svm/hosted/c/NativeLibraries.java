@@ -462,6 +462,7 @@ public final class NativeLibraries {
         return allStaticLibs.get(Paths.get(libPrefix + staticLibraryName + libSuffix));
     }
 
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", justification = "#1791")
     private Map<Path, Path> getAllStaticLibs() {
         Map<Path, Path> allStaticLibs = new LinkedHashMap<>();
         for (String libraryPath : getLibraryPaths()) {

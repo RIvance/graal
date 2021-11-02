@@ -195,6 +195,7 @@ final class IsolatedCompilableTruffleAST extends IsolatedObjectProxy<SubstrateCo
         return compilable.getNonTrivialNodeCount();
     }
 
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", justification = "#1791")
     @CEntryPoint(include = CEntryPoint.NotIncludedAutomatically.class)
     @CEntryPointOptions(publishAs = CEntryPointOptions.Publish.NotPublished)
     private static CompilerHandle<IsolatedTruffleCallNode[]> getCallNodes0(@SuppressWarnings("unused") ClientIsolateThread client, ClientHandle<SubstrateCompilableTruffleAST> compilableHandle) {

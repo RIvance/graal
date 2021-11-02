@@ -27,9 +27,6 @@ package com.oracle.svm.graal.isolated;
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 
-import jdk.vm.ci.meta.ResolvedJavaField;
-import jdk.vm.ci.meta.ResolvedJavaMethod;
-import jdk.vm.ci.meta.ResolvedJavaType;
 import org.graalvm.compiler.serviceprovider.UnencodedSpeculationReason;
 import org.graalvm.nativeimage.PinnedObject;
 import org.graalvm.nativeimage.c.function.CEntryPoint;
@@ -41,6 +38,9 @@ import com.oracle.svm.core.deopt.SubstrateSpeculationLog.SubstrateSpeculation;
 import com.oracle.svm.core.util.VMError;
 
 import jdk.vm.ci.meta.JavaConstant;
+import jdk.vm.ci.meta.ResolvedJavaField;
+import jdk.vm.ci.meta.ResolvedJavaMethod;
+import jdk.vm.ci.meta.ResolvedJavaType;
 import jdk.vm.ci.meta.SpeculationLog;
 
 public final class IsolatedSpeculationLog extends IsolatedObjectProxy<SpeculationLog> implements SpeculationLog {
@@ -131,6 +131,7 @@ public final class IsolatedSpeculationLog extends IsolatedObjectProxy<Speculatio
         }
     }
 
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", justification = "#1791")
     @Override
     public boolean maySpeculate(SpeculationReason reason) {
         byte[] bytes = encodeAsByteArray(reason);
@@ -139,6 +140,7 @@ public final class IsolatedSpeculationLog extends IsolatedObjectProxy<Speculatio
         }
     }
 
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", justification = "#1791")
     @Override
     public Speculation speculate(SpeculationReason reason) {
         byte[] bytes = encodeAsByteArray(reason);

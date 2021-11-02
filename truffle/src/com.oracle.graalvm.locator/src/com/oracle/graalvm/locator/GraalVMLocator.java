@@ -159,6 +159,7 @@ public final class GraalVMLocator extends TruffleLocator
 
     }
 
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", justification = "#1791")
     private static void collectLanguageJars(Map<String, Path> homes, List<URL> classPath) {
         for (Map.Entry<String, Path> languageHome : homes.entrySet()) {
             final Path languageLocation = languageHome.getValue();

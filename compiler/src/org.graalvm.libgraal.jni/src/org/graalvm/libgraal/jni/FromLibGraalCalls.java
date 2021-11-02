@@ -25,8 +25,6 @@
 package org.graalvm.libgraal.jni;
 
 import static org.graalvm.nativebridge.jni.JNIExceptionWrapper.wrapAndThrowPendingJNIException;
-
-import org.graalvm.libgraal.jni.annotation.FromLibGraalId;
 import static org.graalvm.nativebridge.jni.JNIUtil.GetStaticMethodID;
 import static org.graalvm.nativebridge.jni.JNIUtil.NewGlobalRef;
 import static org.graalvm.nativebridge.jni.JNIUtil.getBinaryName;
@@ -37,6 +35,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 
+import org.graalvm.libgraal.jni.annotation.FromLibGraalId;
 import org.graalvm.nativebridge.jni.HotSpotCalls;
 import org.graalvm.nativebridge.jni.JNI;
 import org.graalvm.nativebridge.jni.JNI.JClass;
@@ -173,6 +172,7 @@ public abstract class FromLibGraalCalls<T extends Enum<T> & FromLibGraalId> {
         assert hcId.getReturnType() == expectedReturnType || expectedReturnType.isAssignableFrom(hcId.getReturnType());
         try {
             return methods.computeIfAbsent(hcId, new Function<T, JNIMethodImpl<T>>() {
+                @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", justification = "#1791")
                 @Override
                 public JNIMethodImpl<T> apply(T id) {
                     JClass c = peer(env);

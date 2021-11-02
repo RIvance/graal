@@ -24,22 +24,24 @@
  */
 package org.graalvm.compiler.truffle.runtime;
 
-import com.oracle.truffle.api.dsl.Introspection;
-import com.oracle.truffle.api.nodes.Node;
-import com.oracle.truffle.api.nodes.RootNode;
-import org.graalvm.graphio.GraphOutput;
-import org.graalvm.graphio.GraphStructure;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
 import org.graalvm.compiler.truffle.common.TruffleDebugContext;
+import org.graalvm.graphio.GraphOutput;
+import org.graalvm.graphio.GraphStructure;
+
+import com.oracle.truffle.api.dsl.Introspection;
+import com.oracle.truffle.api.nodes.Node;
+import com.oracle.truffle.api.nodes.RootNode;
 
 class PolymorphicSpecializeDump {
 
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", justification = "#1791")
     public static void dumpPolymorphicSpecialize(OptimizedCallTarget callTarget, List<Node> toDump) {
         assert toDump.size() > 0;
         try (TruffleDebugContext debugContext = openDebugContext(callTarget)) {

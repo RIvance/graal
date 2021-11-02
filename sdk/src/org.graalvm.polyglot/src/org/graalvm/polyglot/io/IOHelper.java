@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, 2020, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2018, 2021, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * The Universal Permissive License (UPL), Version 1.0
@@ -61,6 +61,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+
 import org.graalvm.polyglot.Engine;
 import org.graalvm.polyglot.impl.AbstractPolyglotImpl;
 
@@ -81,6 +82,7 @@ final class IOHelper {
         return obj;
     }
 
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", justification = "#1791")
     static void copy(final Path source, final Path target, final FileSystem sourceFileSystem, final FileSystem targetFileSystem, CopyOption... options) throws IOException {
         if (source.equals(target)) {
             return;

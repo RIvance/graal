@@ -77,6 +77,7 @@ final class IsolatedTruffleCompilerEventForwarder implements TruffleCompilerList
         onSuccess0(IsolatedCompileContext.get().getClient(), contextHandle, IsolatedCompileContext.get().hand(graph), graph.getNodeCount(), data, tier);
     }
 
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", justification = "#1791")
     @Override
     public void onFailure(CompilableTruffleAST compilable, String reason, boolean bailout, boolean permanentBailout, int tier) {
         try (CCharPointerHolder reasonCstr = CTypeConversion.toCString(reason)) {

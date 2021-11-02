@@ -166,6 +166,7 @@ final class NativeClosure {
         return ImageSingletons.lookup(TruffleNFISupport.class).resolveClosureHandle(data.nativeClosureHandle());
     }
 
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", justification = "#1791")
     private static PointerBase serializeStringRet(Object retValue) {
         if (retValue == null) {
             return WordFactory.zero();

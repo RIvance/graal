@@ -95,6 +95,7 @@ final class PosixTruffleNFISupport extends TruffleNFISupport {
         return LibC.strdup(src);
     }
 
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", justification = "#1791")
     private static PointerBase dlmopen(Lmid_t lmid, String filename, int mode) {
         try (CTypeConversion.CCharPointerHolder pathPin = CTypeConversion.toCString(filename)) {
             CCharPointer pathPtr = pathPin.get();

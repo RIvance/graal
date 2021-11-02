@@ -146,6 +146,7 @@ public final class IsolatedGraalUtils {
         return (array != null) ? Array.getLength(array) : -1;
     }
 
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", justification = "#1791")
     public static void applyClientRuntimeOptionValues(ClientHandle<byte[]> encodedOptionsHandle, int encodedOptionsLength) {
         if (!encodedOptionsHandle.equal(IsolatedHandles.nullHandle())) {
             byte[] encodedOptions = new byte[encodedOptionsLength];

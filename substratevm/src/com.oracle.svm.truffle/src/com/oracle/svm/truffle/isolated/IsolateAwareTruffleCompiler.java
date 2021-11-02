@@ -221,6 +221,7 @@ public class IsolateAwareTruffleCompiler implements SubstrateTruffleCompiler {
         }
     }
 
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", justification = "#1791")
     private static Map<String, Object> decodeOptions(ClientIsolateThread client, ClientHandle<byte[]> encodedOptionsHandle, int encodedOptionsLength) {
         if (encodedOptionsLength <= 0) {
             return Collections.emptyMap();

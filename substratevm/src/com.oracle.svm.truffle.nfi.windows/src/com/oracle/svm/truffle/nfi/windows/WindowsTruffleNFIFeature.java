@@ -91,6 +91,7 @@ final class WindowsTruffleNFISupport extends TruffleNFISupport {
         LibLoaderAPI.FreeLibrary(WordFactory.pointer(library));
     }
 
+    @SuppressFBWarnings(value = "RCN_REDUNDANT_NULLCHECK_WOULD_HAVE_BEEN_A_NPE", justification = "#1791")
     @Override
     protected long lookupImpl(long nativeContext, long library, String name) {
         // clear previous error
